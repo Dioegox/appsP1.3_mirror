@@ -33,6 +33,10 @@ function App() {
                         ) : (
                         <Routes>
                             <Route path="/" element={<LoginPage />} />
+                            <Route path="/trips" element={<LoginPage />} />
+                            <Route path="/friends" element={<LoginPage />} />
+                            <Route path="/map" element={<LoginPage />} />
+                            <Route path="/search" element={<LoginPage />} />
                         </Routes>
                     )}
                 </div>
