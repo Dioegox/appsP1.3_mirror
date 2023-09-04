@@ -12,6 +12,10 @@ function TopNav(props) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const handledeletelocal = () => {
+    localStorage.removeItem('token');
+    window.location.href = '/';
+  };
 
   return (
     <Box className={"BoxNav"}>
@@ -42,7 +46,7 @@ function TopNav(props) {
         >
           <MenuItem onClick={handleClose}>Profile</MenuItem>
           <MenuItem onClick={handleClose}>Settings</MenuItem>
-          <MenuItem onClick={handleClose}>Logout</MenuItem>
+          <MenuItem onClick={handledeletelocal}>Logout</MenuItem>
         </Menu>
 
       </Container>

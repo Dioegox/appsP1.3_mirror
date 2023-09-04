@@ -16,19 +16,25 @@ import LoginPage from "./components/LoginPage/LoginPage";
 
 
 function App() {
+    const token = localStorage.getItem('token');
     return (
         <div className="App">
             <HashRouter>
                 <div className="App__content">
                     <TopNav />
-                    <Routes>
-                        <Route exact path="/home" element={<HomePage />} />
-                        <Route exact path="/trips" element={<TripsPage />} />
-                        <Route exact path="/friends" element={<FriendsPage />} />
-                        <Route exact path="/map" element={<MapPage />} />
-                        <Route exact path="/search" element={<SearchPage />} />
-                        <Route exact path="/" element={<LoginPage />} />
-                    </Routes>
+                    {token ? (
+                        <Routes>
+                            <Route path="/" element={<HomePage />} />
+                            <Route path="/trips" element={<TripsPage />} />
+                            <Route path="/friends" element={<FriendsPage />} />
+                            <Route path="/map" element={<MapPage />} />
+                            <Route path="/search" element={<SearchPage />} />
+                        </Routes>
+                        ) : (
+                        <Routes>
+                            <Route path="/" element={<LoginPage />} />
+                        </Routes>
+                    )}
                 </div>
                 <BottomBar />
             </HashRouter>
