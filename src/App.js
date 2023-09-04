@@ -12,6 +12,7 @@ import HomePage from "./components/HomePage/HomePage";
 import FriendsPage from "./components/FriendsPage/FriendsPage";
 import MapPage from "./components/MapPage/MapPage";
 import SearchPage from "./components/SearchPage/SearchPage";
+import LoginPage from "./components/LoginPage/LoginPage";
 
 
 function App() {
@@ -21,11 +22,12 @@ function App() {
                 <div className="App__content">
                     <TopNav />
                     <Routes>
-                        <Route exact path="/" element={<HomePage />} />
+                        <Route exact path="/home" element={<HomePage />} />
                         <Route exact path="/trips" element={<TripsPage />} />
                         <Route exact path="/friends" element={<FriendsPage />} />
                         <Route exact path="/map" element={<MapPage />} />
                         <Route exact path="/search" element={<SearchPage />} />
+                        <Route exact path="/" element={<LoginPage />} />
                     </Routes>
                 </div>
                 <BottomBar />
