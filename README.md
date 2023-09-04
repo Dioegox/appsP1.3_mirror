@@ -1,7 +1,14 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/t9QTJJzF)
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-718a45dd9cf7e7f842a935f5ebbe5719a5e09af4491e668f4dbf3b35d5cca122.svg)](https://classroom.github.com/online_ide?assignment_repo_id=11640216&assignment_repo_type=AssignmentRepo)
 
-**Nombres de integrantes del grupo**: (completar aquí)
+**Nombres de integrantes del grupo**: 
+Diego Galvez
+
+Matias Pedemonte
+
+
+Intentamos hacer la query para mostrar los Trips pero solo tenemos al usuario admin que no tiene post por lo que no podemos comprobar el funcionamiento del programa
+
 # Proyecto 1.3 - Primera aproximación al Frontend Web Móvil con React
 
 En este laboratorio desarrollarás una parte del frontend de la aplicación Travel Log, utilizando React.
