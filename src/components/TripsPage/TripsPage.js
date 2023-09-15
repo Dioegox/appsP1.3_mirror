@@ -15,8 +15,6 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.primary,
 }));
 
-let email = "audie_johns@schuppe.name";
-
 function TripsPage(props) {
   const [extended, setExtended] = useState(true);
   const [newtrip, setNewTrip] = useState(true);
@@ -42,7 +40,10 @@ function TripsPage(props) {
   }, [isScrollingUp, isScrollingDown])
 
   const navigate = useNavigate();
-  const { loading, error, data } = useQuery(GET_DATA(email)); // Pass email to the query
+  const storedCredentials = localStorage.getItem('credentials');
+  const [storedEmail, storedPassword] = atob(storedCredentials).split(':');
+  const token = localStorage.getItem('token');
+  const { loading, error, data } = useQuery(GET_DATA(storedEmail));
 
   if (loading) return <CircularProgress />;
   if (error) return <h1>Error: {error.message}</h1>;

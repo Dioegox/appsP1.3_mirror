@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import React from "react";
 import TripsPage from "./components/TripsPage";
+import TripPage from "./components/TripPage";
 import BottomBar from "./components/BottomBar/BottomBar";
 import TopNav from "./components/TopNav/TopNav";
 import HomePage from "./components/HomePage/HomePage";
@@ -26,6 +27,7 @@ function App() {
                         <Routes>
                             <Route path="/" element={<HomePage />} />
                             <Route path="/trips" element={<TripsPage />} />
+                            <Route path="/trip" element={<TripPage />} />
                             <Route path="/friends" element={<FriendsPage />} />
                             <Route path="/map" element={<MapPage />} />
                             <Route path="/search" element={<SearchPage />} />

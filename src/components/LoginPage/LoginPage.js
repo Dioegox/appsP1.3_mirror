@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
     const classes = useStyles();
 
     const credentials = btoa(`${email}:${password}`);
+    localStorage.setItem('credentials', credentials);
 
     const handleSubmit = async (e) => {
         e.preventDefault();

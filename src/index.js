@@ -13,12 +13,13 @@ import {
     InMemoryCache
 } from '@apollo/client';
 import {AUTH_TOKEN} from "./constants";
+const token = localStorage.getItem('token');
 
 const authLink = setContext((_, {headers}) => {
     return {
         headers: {
             ...headers,
-            Authorization: `Bearer ${AUTH_TOKEN}`,
+            Authorization: `Bearer ${token}`,
             // accessControlAllowOrigin: '*',
             // accessControlAllowHeaders: 'Origin, X-Requested-With, Content-Type, Accept',
         }
@@ -26,7 +27,7 @@ const authLink = setContext((_, {headers}) => {
 });
 
 const hostname = window.location.hostname;
-const baseUrl = `http://${hostname}:9090/`
+const baseUrl = `http://${hostname}:3000/`
 let gqlUrl = `${baseUrl}/api/v1/graphql`;
 
 const gqlHTTPLink = createHttpLink({
