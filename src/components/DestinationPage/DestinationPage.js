@@ -22,8 +22,8 @@ class DestinationPage extends Component {
       this.state = {
         address: "", // To store the user's input address
         mapCenter: {
-          lat: 0, // Initialize with default values
-          lng: 0,
+          lat: -33.4513, // Initialize with default values
+          lng: -70.6653,
         },
       };
     }
@@ -112,7 +112,7 @@ class DestinationPage extends Component {
           
           <Map
             google={google}
-            zoom={14}
+            zoom={2}
             style={mapStyles}
             initialCenter={this.state.mapCenter} // Center map based on user's selection
           >
