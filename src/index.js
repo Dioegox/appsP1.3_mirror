@@ -13,6 +13,7 @@ import {
     InMemoryCache
 } from '@apollo/client';
 import {AUTH_TOKEN} from "./constants";
+
 const token = localStorage.getItem('token');
 
 const authLink = setContext((_, {headers}) => {

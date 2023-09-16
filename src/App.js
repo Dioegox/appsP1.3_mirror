@@ -14,6 +14,7 @@ import FriendsPage from "./components/FriendsPage/FriendsPage";
 import MapPage from "./components/MapPage/MapPage";
 import SearchPage from "./components/SearchPage/SearchPage";
 import LoginPage from "./components/LoginPage/LoginPage";
+import DestinationPage from "./components/DestinationPage/DestinationPage";
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
                             <Route path="/friends" element={<FriendsPage />} />
                             <Route path="/map" element={<MapPage />} />
                             <Route path="/search" element={<SearchPage />} />
+                            <Route path="/destination" element={<DestinationPage />}  />
                         </Routes>
                         ) : (
                         <Routes>
