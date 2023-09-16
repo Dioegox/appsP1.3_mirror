@@ -6,10 +6,10 @@ import PlacesAutocomplete, {
 } from "react-places-autocomplete";
 
 const mapStyles = {
-  width: "200%",
-  height: "4s00px",
+  width: "600px",
+  height: "400px",
   position: "absolute",
-  top: 100,
+  top: 50,
   left: 0,
   right: 0,
   bottom: 0,
@@ -83,22 +83,23 @@ class DestinationPage extends Component {
                 />
                 <div className="autocomplete-dropdown-container">
                   {loading && <div>Loading...</div>}
-                  {suggestions.map((suggestion) => {
+                  {suggestions.map((suggestion, index) => {
                     const className = suggestion.active
-                      ? "suggestion-item--active"
-                      : "suggestion-item";
-                    // Add styles and suggestions as needed
+                        ? "suggestion-item--active"
+                        : "suggestion-item";
+                    // Add a unique key to each suggestion item
                     return (
-                      <div
+                        <div
+                        key={index} // Use the 'index' as the key
                         {...getSuggestionItemProps(suggestion, {
-                          className,
+                            className,
                         })}
-                      >
+                        >
                         {suggestion.description}
-                      </div>
+                        </div>
                     );
-                  })}
-                </div>
+                    })}
+                </div>A
               </div>
             )}
           </PlacesAutocomplete>
@@ -124,5 +125,5 @@ class DestinationPage extends Component {
   }
   
 export default GoogleApiWrapper({
-  apiKey: process.env.REACT_APP_GAPI_KEY ,
+  apiKey: process.env.REACT_APP_GAPI_KEY,
 })(DestinationPage);
