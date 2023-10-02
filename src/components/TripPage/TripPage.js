@@ -15,7 +15,7 @@ class TripPage extends Component {
     ];
 
     return (
-      <div>
+      <div class='trip-box'>
         <h1>Trip Page</h1>
         {currentTrip && (
           <div>

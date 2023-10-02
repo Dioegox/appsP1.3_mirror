@@ -3,3 +3,14 @@
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically */
     height: 400px; }
+
+.trip-box {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 2000px
+    }
+
+.trip-box.h2 {
+    margin-top: 200px
+}

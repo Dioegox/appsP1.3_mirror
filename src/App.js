@@ -15,6 +15,7 @@ import MapPage from "./components/MapPage/MapPage";
 import SearchPage from "./components/SearchPage/SearchPage";
 import LoginPage from "./components/LoginPage/LoginPage";
 import DestinationPage from "./components/DestinationPage/DestinationPage";
+import ProfilePage from "./components/ProfilePage/ProfilePage";
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
                             <Route path="/map" element={<MapPage />} />
                             <Route path="/search" element={<SearchPage />} />
                             <Route path="/destination" element={<DestinationPage />}  />
+                            <Route path="/profile" element={<ProfilePage />}  />
                         </Routes>
                         ) : (
                         <Routes>
@@ -41,6 +43,7 @@ function App() {
                             <Route path="/friends" element={<LoginPage />} />
                             <Route path="/map" element={<LoginPage />} />
                             <Route path="/search" element={<LoginPage />} />
+                            <Route path="/profile" element={<ProfilePage />} />
                         </Routes>
                     )}
                 </div>

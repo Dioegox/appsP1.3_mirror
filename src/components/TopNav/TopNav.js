@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import './TopNav.css';
 import { Avatar, Box, Button, Container, Menu, MenuItem } from "@mui/material";
 import { Rectangle } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 function TopNav(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -16,6 +17,7 @@ function TopNav(props) {
     localStorage.removeItem('token');
     window.location.href = '/';
   };
+  const navigate = useNavigate();
 
   return (
     <Box className={"BoxNav"}>
@@ -44,7 +46,7 @@ function TopNav(props) {
           }}
 
         >
-          <MenuItem onClick={handleClose}>Profile</MenuItem>
+          <MenuItem onClick={() => navigate('/Profile')}>Profile</MenuItem>
           <MenuItem onClick={handleClose}>Settings</MenuItem>
           <MenuItem onClick={handledeletelocal}>Logout</MenuItem>
         </Menu>
