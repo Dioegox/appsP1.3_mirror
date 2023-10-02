@@ -16,6 +16,7 @@ import SearchPage from "./components/SearchPage/SearchPage";
 import LoginPage from "./components/LoginPage/LoginPage";
 import DestinationPage from "./components/DestinationPage/DestinationPage";
 import ProfilePage from "./components/ProfilePage/ProfilePage";
+import PostPage from "./components/PostPage/PostPage";
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
                             <Route path="/search" element={<SearchPage />} />
                             <Route path="/destination" element={<DestinationPage />}  />
                             <Route path="/profile" element={<ProfilePage />}  />
+                            <Route path="/post" element={<PostPage />}  />
                         </Routes>
                         ) : (
                         <Routes>

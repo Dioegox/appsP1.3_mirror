@@ -44,6 +44,12 @@ function ProfilePage(props) {
         setAnchorEl(null);
     };
 
+    const [selectedFile, setSelectedFile] = useState(null);
+    function handleFileChange(event) {
+        const file = event.target.files[0];
+        setSelectedFile(file);
+    }
+
     const open = Boolean(anchorEl);
     
     return (
@@ -52,39 +58,30 @@ function ProfilePage(props) {
             <h5> . </h5>
             <h1>Profile</h1>
             
-            {/* Botón para cambiar foto de perfil (actualmente no hace nada) */}
-            <Button variant="outlined">Cambiar foto de perfil</Button>
             
-            {/* Círculo para la foto de perfil */}
-            {data && (
-                <div>
-                    <Avatar
-                        alt="User Profile Picture"
-                        src="/static/images/avatar/2.jpg" // Reemplaza esto con la URL de la foto de perfil si está disponible en tus datos
-                        sx={{ width: 100, height: 100, cursor: 'pointer' }}
-                        onClick={handlePopoverOpen}
-                    />
-                    <Popover
-                        open={open}
-                        anchorEl={anchorEl}
-                        onClose={handlePopoverClose}
-                        anchorOrigin={{
-                            vertical: 'bottom',
-                            horizontal: 'right',
-                        }}
-                        transformOrigin={{
-                            vertical: 'top',
-                            horizontal: 'right',
-                        }}
-                    >
-                        <Avatar
-                            alt="User Profile Picture"
-                            src="/static/images/avatar/2.jpg" // Reemplaza esto con la URL de la foto de perfil si está disponible en tus datos
-                            sx={{ width: 200, height: 200 }}
-                        />
-                    </Popover>
-                </div>
-            )}
+            
+
+            <Avatar
+                sx={{ m: 1 }}
+                src={
+                selectedFile
+                    ? URL.createObjectURL(selectedFile)
+                    : "../../public/images/1.jpg"
+                }
+            />
+            <input
+                type="file"
+                accept="image/*"
+                style={{ display: "none" }}
+                onChange={handleFileChange}
+                id="avatar-upload"
+            />
+            <label htmlFor="avatar-upload">
+                <Button variant="contained" component="span">
+                Subir Foto
+                </Button>
+            </label>
+
             {data && (
                 <div>
                     <p>Name: {data.first_name}</p>
