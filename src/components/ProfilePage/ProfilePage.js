@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { Box, Avatar, Button, Popover } from "@mui/material";
+import React, { useState, useEffect, useRef } from 'react';
+import { Box, Avatar, Button, Snackbar } from "@mui/material";
 
 function ProfilePage(props) {
     const token = localStorage.getItem('token');
     const storedCredentials = localStorage.getItem('credentials');
     const [storedEmail, storedPassword] = atob(storedCredentials).split(':');
-    const [ProfileError, setProfileError] = useState(false);
+    const [userId, setUserId] = useState(null);
+    const [imageURL, setImageURL] = useState(null);
     const [data, setData] = useState(null);
-    const [anchorEl, setAnchorEl] = useState(null);
+    const [successMessage, setSuccessMessage] = useState(null);
 
+
+    // Las 3 Querys
     const handleSubmit = async () => {
         try {
             const response = await fetch(`http://localhost:3000/api/v1/users/${storedEmail}`, {
@@ -22,9 +25,10 @@ function ProfilePage(props) {
             if (response.ok) {   
                 const responseData = await response.json();
                 setData(responseData);
+                setUserId(responseData.id);
                 console.log("Datos de perfil recuperados:", responseData);
+                handleGetPhoto();
             } else {
-                setProfileError(true);
                 console.error('Datos de perfil no recuperados');
             }
         } catch (error) {
@@ -32,55 +36,95 @@ function ProfilePage(props) {
         }
     };
 
+    const handleUploadPhoto = (file) => {
+        if (userId) { 
+            const formData = new FormData();
+            formData.append('photos', file);
+            formData.append('user_id', userId);
+            
+            fetch(`http://localhost:3000/api/v1/media/upload_photos`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+                body: formData,
+            })
+            .then((response) => {
+                if (response.ok) {
+                    setSuccessMessage('Foto de perfil cargada con éxito');
+                    setImageURL(URL.createObjectURL(file));
+                } else {
+                    console.error('Error al cargar la foto de perfil');
+                }
+            })
+            .catch((error) => {
+                console.error('Error al cargar la foto de perfil:', error);
+            });
+        }
+    };
+
+    const handleGetPhoto = () => {
+        if (userId) { 
+            fetch(`http://localhost:3000/api/v1/media/get_photos_for_user/${userId}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            })
+            .then((response) => {
+                if (response.ok) {
+                    return response.blob();
+                } else {
+                    console.error('Error al obtener la foto de perfil');
+                }
+            })
+            .then((blob) => {
+                const photoURL = URL.createObjectURL(blob);
+                setImageURL(photoURL);
+            })
+            .catch((error) => {
+                console.error('Error al obtener la foto de perfil:', error);
+            });
+        }
+    };
+
+
     useEffect(() => {
         handleSubmit();
+        handleGetPhoto();
     }, []);
 
-    const handlePopoverOpen = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
+    const intervalId = setInterval(() => {
+        handleGetPhoto();
+      }, 1000);
 
-    const handlePopoverClose = () => {
-        setAnchorEl(null);
-    };
-
-    const [selectedFile, setSelectedFile] = useState(null);
-    function handleFileChange(event) {
-        const file = event.target.files[0];
-        setSelectedFile(file);
-    }
-
-    const open = Boolean(anchorEl);
-    
     return (
         <Box>
             <h5> .</h5>
             <h5> . </h5>
             <h1>Profile</h1>
-            
-            
-            
 
             <Avatar
                 sx={{ m: 1 }}
-                src={
-                selectedFile
-                    ? URL.createObjectURL(selectedFile)
-                    : "../../public/images/1.jpg"
-                }
+                src={imageURL || null} 
             />
+
+        <Button variant="contained" component="label">
+            Subir Foto
             <input
                 type="file"
                 accept="image/*"
                 style={{ display: "none" }}
-                onChange={handleFileChange}
-                id="avatar-upload"
+                onChange={(e) => handleUploadPhoto(e.target.files[0])}
             />
-            <label htmlFor="avatar-upload">
-                <Button variant="contained" component="span">
-                Subir Foto
-                </Button>
-            </label>
+        </Button>
+        
+            <Snackbar
+                open={!!successMessage}
+                autoHideDuration={3000} // Duración en milisegundos
+                onClose={() => setSuccessMessage(null)}
+                message={successMessage}
+            />
 
             {data && (
                 <div>
@@ -90,6 +134,7 @@ function ProfilePage(props) {
                     <p>Date of Birth: {data.dob}</p>
                 </div>
             )}
+
         </Box>
     );
 }
